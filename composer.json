@@ -4,5 +4,15 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atom\\Cms\\": "src"
+        }
+    },
+    "extra": {
+        "config-plugin": {
+            "routes": "config/routes.php"
+        }
     }
 }
