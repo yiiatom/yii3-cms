@@ -9,7 +9,7 @@ use Yiisoft\Router\Route;
 return [
     Group::create('/cms')
         ->routes(
-            Route::get('/')
+            Route::get('')
                 ->action(Cms\Dashboard\Action::class)
                 ->name('cms.dashboard'),
         ),
