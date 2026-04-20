@@ -12,6 +12,7 @@
     },
     "extra": {
         "config-plugin": {
+            "params": "config/params.php",
             "routes": "config/routes.php"
         }
     }
