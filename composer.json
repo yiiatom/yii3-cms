@@ -18,16 +18,7 @@
     "extra": {
         "config-plugin": {
             "params": "config/params.php",
-            "common": "config/common.php",
-            "web": [
-                "$common",
-                "?config/web.php"
-            ],
-            "console": [
-                "$common",
-                "?config/console.php"
-            ],
-            "di": "config/di.php",
+            "di-web": "config/di-web.php",
             "events": "config/events.php",
             "routes": "config/routes.php"
         }
