@@ -27,6 +27,7 @@
                 "$common",
                 "?config/console.php"
             ],
+            "di": "config/di.php",
             "events": "config/events.php",
             "routes": "config/routes.php"
         }
