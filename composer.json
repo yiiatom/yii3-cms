@@ -17,9 +17,17 @@
     },
     "extra": {
         "config-plugin": {
-            "common": "config/common.php",
-            "events": "config/events.php",
             "params": "config/params.php",
+            "common": "config/common.php",
+            "web": [
+                "$common",
+                "?config/web.php"
+            ],
+            "console": [
+                "$common",
+                "?config/console.php"
+            ],
+            "events": "config/events.php",
             "routes": "config/routes.php"
         }
     }
