@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Atom\Cms\Web\Shared\Middleware;
+
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Yiisoft\Http\Status;
+use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\User\CurrentUser;
+
+final readonly class Authentication implements MiddlewareInterface
+{
+    public function __construct(
+        private CurrentUser $currentUser,
+        private ResponseFactoryInterface $responseFactory,
+        private UrlGeneratorInterface $urlGenerator,
+    ) {}
+
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler,
+    ): ResponseInterface {
+        if ($this->currentUser->isGuest()) {
+            return $this->responseFactory
+                ->createResponse(Status::FOUND)
+                ->withHeader(
+                    'Location', 
+                    $this->urlGenerator->generate('atom.cms.login'),
+                );
+        }
+
+        return $handler->handle($request);
+    }
+}
