@@ -8,7 +8,8 @@
         "yiisoft/db-migration": "^2.0",
         "yiisoft/form-model": "^1.1",
         "yiisoft/rbac-db": "^2.1",
-        "yiisoft/user": "^2.3"
+        "yiisoft/user": "^2.3",
+        "ramsey/uuid": "^4.9"
     },
     "autoload": {
         "psr-4": {
