@@ -8,7 +8,7 @@ use Yiisoft\FormModel\Field;
 $this->setTitle('Login');
 
 $htmlForm = Html::form()
-    ->class('login-form')
+    ->class('form-login')
     ->post()
     ->csrf($csrf);
 ?>
