@@ -43,6 +43,7 @@ final readonly class Action
         $form = new LoginForm();
 
         $this->formHydrator->populateFromPostAndValidate($form, $request);
+
         if ($form->username && $form->password && !$this->userService->login($form->username, $form->password)) {
             $form->addError('Incorrect username or password.', ['password']);
         }
