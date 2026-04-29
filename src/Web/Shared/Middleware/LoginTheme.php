@@ -8,21 +8,22 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Form\Theme\ThemeContainer;
 
-class LoginTheme implements MiddlewareInterface
+final readonly class LoginTheme implements MiddlewareInterface
 {
+    public function __construct(
+        private Aliases $aliases,
+    ) {}
+
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler,
     ): ResponseInterface {
 
         ThemeContainer::initialize([
-            'login' => [
-                'template' => "{input}",
-                'containerClass' => 'mb-2',
-                'inputClass' => 'form-control',
-            ],
+            'login' => require $this->aliases->get('@atom/cms/config/theme/login.php'),
         ], 'login');
 
         return $handler->handle($request);
