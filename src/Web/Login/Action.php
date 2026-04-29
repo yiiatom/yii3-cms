@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atom\Cms\Web\Login;
 
-use Atom\Cms\Repository\UserRepository;
+use Atom\Cms\Service\UserService;
 use Atom\Cms\Web\Login\LoginForm;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,7 +23,7 @@ final readonly class Action
         private FormHydrator $formHydrator,
         private ResponseFactoryInterface $responseFactory,
         private UrlGeneratorInterface $urlGenerator,
-        private UserRepository $userRepository,
+        private UserService $userService,
         private WebViewRenderer $viewRenderer,
     ) {}
 
@@ -43,7 +43,11 @@ final readonly class Action
         $form = new LoginForm();
 
         $this->formHydrator->populateFromPostAndValidate($form, $request);
-        if ($form->isValid() && $this->login($form)) {
+        if ($form->username && $form->password && !$this->userService->login($form->username, $form->password)) {
+            $form->addError('Incorrect username or password.', ['password']);
+        }
+
+        if ($form->isValid()) {
             return $this->responseFactory
                 ->createResponse(Status::SEE_OTHER)
                 ->withHeader(
@@ -57,24 +61,5 @@ final readonly class Action
             ->render(__DIR__ . '/template', [
                 'form' => $form,
             ]);
-    }
-
-    private function login(LoginForm $form): bool
-    {
-        $identity = $this->userRepository->findOneByUsername($form->username);
-        if (!$identity) {
-            $form->addError('Incorrect username or password.', ['password']);
-            return false;
-        }
-
-        $hasher = new PasswordHasher();
-        if (!$identity->password || !$hasher->validate($form->password, $identity->password)) {
-            $form->addError('Incorrect username or password.', ['password']);
-            return false;
-        }
-
-        $this->currentUser->login($identity);
-
-        return true;
     }
 }
