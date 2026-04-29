@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    max-height: 100vh;
+}
+.sidebar {
+    box-shadow: 0 0 1em rgba(0,0,0,0.5);
+    flex-shrink: 0;
+    width: 280px;
+}
+.sidebar .current-user .avatar {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    font-size: 1.25rem;
+    height: 32px;
+    justify-content: center;
+    margin-right: .5rem;
+    overflow: hidden;
+    width: 32px;
+}
+.sidebar .current-user .avatar img {
+    height: 32px;
+    width: 32px;
+}
+main {
+    flex-grow: 1;
+    overflow: auto;
+}
+.form-main {
+    max-width: 600px;
+}
+.form-main .btn {
+    min-width: 100px;
+}

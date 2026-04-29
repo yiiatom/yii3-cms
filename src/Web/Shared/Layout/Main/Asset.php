@@ -14,6 +14,11 @@ final class Asset extends AssetBundle
 
     public array $css = [
         'bootstrap/css/bootstrap.min.css',
+        'fontawesome/css/all.min.css',
         'main.css',
+    ];
+
+    public array $js = [
+        'bootstrap/js/bootstrap.bundle.min.js',
     ];
 }

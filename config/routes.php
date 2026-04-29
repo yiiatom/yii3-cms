@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Atom\Cms\Web\Shared\Middleware\Authentication;
 use Atom\Cms\Web\Shared\Middleware\LoginTheme;
+use Atom\Cms\Web\Shared\Middleware\MainTheme;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
@@ -17,6 +18,7 @@ return [
                 ->name('atom.cms.login'),
 
             Group::create('')
+                ->middleware(MainTheme::class)
                 ->middleware(Authentication::class)
                 ->routes(
                     Route::get('')
@@ -26,6 +28,10 @@ return [
                     Route::get('/logout')
                         ->action(Atom\Cms\Web\Logout\Action::class)
                         ->name('atom.cms.logout'),
+
+                    Route::methods([Method::GET, Method::POST], '/change-password')
+                        ->action(Atom\Cms\Web\ChangePassword\Action::class)
+                        ->name('atom.cms.change-password'),
                 ),
         ),
 ];

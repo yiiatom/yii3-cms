@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Atom\Cms\Repository;
 
+use DateTimeImmutable;
 use Atom\Cms\Entity\User;
 use Yiisoft\Auth\IdentityInterface;
 use Yiisoft\Auth\IdentityRepositoryInterface;
@@ -25,6 +26,38 @@ final readonly class UserRepository implements IdentityRepositoryInterface
         return $this->findOneByToken($token);
     }
 
+    public function exists(string $uuid): bool
+    {
+        return $this->connection->createQuery()
+            ->from('{{%user}}')
+            ->where(['uuid' => $uuid])
+            ->exists();
+    }
+
+    public function save(User $user): void
+    {
+        $row = [
+            'uuid' => $user->uuid,
+            'username' => $user->username,
+            'email' => $user->email,
+            'password' => $user->password,
+            'token' => $user->token,
+            'status' => $user->status,
+            'first_name' => $user->firstName,
+            'last_name' => $user->lastName,
+            'avatar_url' => $user->avatarUrl,
+            'created_at' => $user->createdAt,
+            'login_at' => $user->loginAt,
+            'login_ip' => $user->loginIp,
+        ];
+
+        if ($this->exists($user->uuid)) {
+            $this->connection->createCommand()->update('{{%user}}', $row, ['uuid' => $user->uuid])->execute();
+        } else {
+            $this->connection->createCommand()->insert('{{%user}}', $row)->execute();
+        }
+    }
+
     private function createEntity(?array $row): ?User
     {
         if ($row === null) {
@@ -34,8 +67,16 @@ final readonly class UserRepository implements IdentityRepositoryInterface
         return User::create(
             uuid: $row['uuid'],
             username: $row['username'],
+            email: $row['email'],
             password: $row['password'],
             token: $row['token'],
+            status: (int) $row['status'],
+            firstName: $row['first_name'],
+            lastName: $row['last_name'],
+            avatarUrl: $row['avatar_url'],
+            createdAt: $row['created_at'] ? new DateTimeImmutable($row['created_at']) : null,
+            loginAt: $row['login_at'] ? new DateTimeImmutable($row['login_at']) : null,
+            loginIp: $row['login_ip'],
         );
     }
 
