@@ -13,7 +13,7 @@ final class Asset extends AssetBundle
     public ?string $sourcePath = '@atom/cms/assets';
 
     public array $css = [
-        'bootstrap.min.css',
+        'bootstrap/css/bootstrap.min.css',
         'fontawesome/css/all.min.css',
         'login.css',
     ];
