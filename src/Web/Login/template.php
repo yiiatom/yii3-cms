@@ -26,6 +26,7 @@ $htmlForm = Html::form()
                     ->placeholder($form->getPropertyLabel('username')) ?>
                 <?= Field::password($form, 'password')
                     ->placeholder($form->getPropertyLabel('password')) ?>
+                <?= Field::checkbox($form, 'rememberMe') ?>
 
                 <?php if ($form->isValidated() && !$form->isValid()): ?>
                     <div class="alert alert-danger mb-2" role="alert">

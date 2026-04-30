@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Atom\Cms\Web\ChangePassword;
 
+use Atom\Cms\Repository\UserRepository;
 use Atom\Cms\Service\UserService;
 use Atom\Cms\Web\ChangePassword\ChangePasswordForm;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -12,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Status;
 use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Security\PasswordHasher;
 use Yiisoft\User\CurrentUser;
 use Yiisoft\Yii\View\Renderer\WebViewRenderer;
 
@@ -22,6 +24,7 @@ final readonly class Action
         private FormHydrator $formHydrator,
         private ResponseFactoryInterface $responseFactory,
         private UrlGeneratorInterface $urlGenerator,
+        private UserRepository $userRepository,
         private UserService $userService,
         private WebViewRenderer $viewRenderer,
     ) {}
@@ -42,7 +45,9 @@ final readonly class Action
         }
 
         if ($form->isValid()) {
-            $this->userService->changePassword($identity, $form->newPassword);
+            $identity->password = (new PasswordHasher())->hash($form->newPassword);
+            $identity->authKey = null;
+            $this->userRepository->save($identity);
 
             return $this->responseFactory
                 ->createResponse(Status::SEE_OTHER)

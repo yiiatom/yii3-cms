@@ -7,8 +7,9 @@ namespace Atom\Cms\Entity;
 use DateTimeImmutable;
 use Atom\Cms\Repository\UserRepository;
 use Yiisoft\Auth\IdentityInterface;
+use Yiisoft\User\Login\Cookie\CookieLoginIdentityInterface;
 
-final class User implements IdentityInterface
+final class User implements IdentityInterface, CookieLoginIdentityInterface
 {
     const STATUS_PENDING = 0;
     const STATUS_ACTIVE = 1;
@@ -21,6 +22,7 @@ final class User implements IdentityInterface
         public ?string $email,
         public ?string $password,
         public ?string $token,
+        public ?string $authKey,
         public int $status,
         public ?string $firstName,
         public ?string $lastName,
@@ -36,6 +38,7 @@ final class User implements IdentityInterface
         ?string $email = null,
         ?string $password = null,
         ?string $token = null,
+        ?string $authKey = null,
         int $status = self::STATUS_PENDING,
         ?string $firstName = null,
         ?string $lastName = null,
@@ -51,6 +54,7 @@ final class User implements IdentityInterface
             email: $email,
             password: $password,
             token: $token,
+            authKey: $authKey,
             status: $status,
             firstName: $firstName,
             lastName: $lastName,
@@ -64,5 +68,15 @@ final class User implements IdentityInterface
     public function getId(): string
     {
         return $this->uuid;
+    }
+
+    public function getCookieLoginKey(): string
+    {
+        return $this->authKey;
+    }
+
+    public function validateCookieLoginKey(string $key): bool
+    {
+        return $this->authKey === $key;
     }
 }

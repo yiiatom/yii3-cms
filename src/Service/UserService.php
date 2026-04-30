@@ -25,27 +25,6 @@ final readonly class UserService
         return (new PasswordHasher())->validate($password, $identity->password);
     }
 
-    public function login(string $username, string $password): bool
-    {
-        $identity = $this->userRepository->findOneByUsername($username);
-        if (!$identity) {
-            return false;
-        }
-
-        if (!$this->validatePassword($identity, $password)) {
-            return false;
-        }
-
-        $this->currentUser->login($identity);
-
-        return true;
-    }
-
-    public function logout(): bool
-    {
-        return $this->currentUser->logout();
-    }
-
     public function changePassword(User $identity, string $password): void
     {
         $identity->password = (new PasswordHasher())->hash($password);

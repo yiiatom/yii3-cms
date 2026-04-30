@@ -8,9 +8,11 @@ use Atom\Cms\Web\Shared\Middleware\MainTheme;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
+use Yiisoft\User\Login\Cookie\CookieLoginMiddleware;
 
 return [
     Group::create('/cms')
+        ->middleware(CookieLoginMiddleware::class)
         ->routes(
             Route::methods([Method::GET, Method::POST], '/login')
                 ->middleware(LoginTheme::class)
