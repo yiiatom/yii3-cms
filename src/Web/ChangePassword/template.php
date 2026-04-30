@@ -10,7 +10,7 @@ $title = 'Change Password';
 $this->setTitle($title);
 
 $htmlForm = Html::form()
-    ->class('form-main form-change-password')
+    ->class('form-default form-change-password')
     ->post()
     ->csrf($csrf);
 ?>

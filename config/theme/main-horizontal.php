@@ -15,9 +15,9 @@ use Yiisoft\Form\Field\Select;
 use Yiisoft\Form\Field\SubmitButton;
 
 return [
-    'template' => "{label}\n<div class=\"col-sm-8\">{input}\n{hint}\n{error}</div>",
+    'template' => "{label}\n<div class=\"col-sm-9\">{input}\n{hint}\n{error}</div>",
     'containerClass' => 'mb-2 row',
-    'labelClass' => 'col-sm-4 col-form-label',
+    'labelClass' => 'col-sm-3 col-form-label',
     'inputClass' => 'form-control',
     'hintClass' => 'form-text',
     'errorClass' => 'invalid-feedback',
@@ -26,7 +26,7 @@ return [
     'fieldConfigs' => [
         Checkbox::class => [
             'labelPlacement()' => [CheckboxLabelPlacement::SIDE],
-            'addContainerClass()' => ['form-check offset-2'],
+            'addContainerClass()' => ['form-check offset-3'],
             'inputClass()' => ['form-check-input'],
             'inputLabelClass()' => ['form-check-label'],
         ],

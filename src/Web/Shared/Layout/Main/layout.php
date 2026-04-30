@@ -27,11 +27,14 @@ $this->beginPage()
 <body>
 <?php $this->beginBody() ?>
 
-<aside class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
-    <?= Html::a('<span class="fs-4">Atom</span>')
-        ->encode(false)
-        ->url($urlGenerator->generate('atom.cms.dashboard'))
-        ->class('d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none') ?>
+<aside class="sidebar text-white bg-dark">
+    <div class="sidebar-header">
+        <?= Html::a('<span>Atom</span>')
+            ->encode(false)
+            ->url($urlGenerator->generate('atom.cms.dashboard'))
+            ->class('text-white text-decoration-none fs-4') ?>
+        <span class="ver">0.1.0-dev</span>
+    </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -71,7 +74,7 @@ $this->beginPage()
     </div>
 </aside>
 
-<main class="mx-3">
+<main class="main-container">
     <?= $content ?>
 </main>
 
