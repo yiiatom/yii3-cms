@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Atom\Cms\Web\Login;
 
+use Atom\Cms\Entity\User;
 use Atom\Cms\Repository\UserRepository;
 use Atom\Cms\Service\UserService;
 use Atom\Cms\Web\Login\LoginForm;
@@ -52,7 +53,7 @@ final readonly class Action
 
         if ($form->username && $form->password) {
             $identity = $this->userRepository->findOneByUsername($form->username);
-            if (!$identity || !$this->userService->validatePassword($identity, $form->password)) {
+            if (!$identity || $identity->status !== User::STATUS_ACTIVE || !$this->userService->validatePassword($identity, $form->password)) {
                 $form->addError('Incorrect username or password.', ['password']);
             }
         }
