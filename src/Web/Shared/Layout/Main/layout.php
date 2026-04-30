@@ -58,6 +58,11 @@ $this->beginPage()
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li>
+                <?= Html::a('Profile')
+                    ->url($urlGenerator->generate('atom.cms.profile'))
+                    ->class('dropdown-item') ?>
+            </li>
+            <li>
                 <?= Html::a('Change password')
                     ->url($urlGenerator->generate('atom.cms.change-password'))
                     ->class('dropdown-item') ?>

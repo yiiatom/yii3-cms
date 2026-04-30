@@ -31,6 +31,10 @@ return [
                         ->action(Atom\Cms\Web\Logout\Action::class)
                         ->name('atom.cms.logout'),
 
+                    Route::methods([Method::GET, Method::POST], '/profile')
+                        ->action(Atom\Cms\Web\Profile\Action::class)
+                        ->name('atom.cms.profile'),
+
                     Route::methods([Method::GET, Method::POST], '/change-password')
                         ->action(Atom\Cms\Web\ChangePassword\Action::class)
                         ->name('atom.cms.change-password'),
