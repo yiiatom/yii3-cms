@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Shared\Middleware;
+namespace Atom\Web\Shared\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,7 +23,7 @@ final readonly class MainTheme implements MiddlewareInterface
     ): ResponseInterface {
 
         ThemeContainer::initialize([
-            'horizontal' => require $this->aliases->get('@atom/cms/config/theme/main-horizontal.php'),
+            'horizontal' => require $this->aliases->get('@atom/config/theme/main-horizontal.php'),
         ], 'horizontal');
 
         return $handler->handle($request);

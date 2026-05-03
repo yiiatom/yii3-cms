@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Listener;
+namespace Atom\User;
 
-use Atom\Cms\Repository\UserRepository;
+use DateTimeImmutable;
+use Atom\User\UserRepository;
 use Yiisoft\User\Event\AfterLogin;
 
 final readonly class AfterLoginListener
@@ -13,9 +14,11 @@ final readonly class AfterLoginListener
         private UserRepository $userRepository,
     ) {}
 
-    function __invoke(AfterLogin $event): void {
+    function __invoke(
+        AfterLogin $event,
+    ): void {
         $identity = $event->getIdentity();
-        $identity->loginAt = new \DateTimeImmutable();
+        $identity->loginAt = new DateTimeImmutable();
         $identity->loginIp = $_SERVER['REMOTE_ADDR'] ?? null;
         $this->userRepository->save($identity);
     }

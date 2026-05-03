@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Login;
+namespace Atom\Web\Login;
 
-use Atom\Cms\Entity\User;
-use Atom\Cms\Repository\UserRepository;
-use Atom\Cms\Service\UserService;
-use Atom\Cms\Web\Login\LoginForm;
+use Atom\User\User;
+use Atom\User\UserRepository;
+use Atom\User\UserService;
+use Atom\Web\Login\LoginForm;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -42,7 +42,7 @@ final readonly class Action
                 ->createResponse(Status::SEE_OTHER)
                 ->withHeader(
                     'Location', 
-                    $this->urlGenerator->generate('atom.cms.dashboard'),
+                    $this->urlGenerator->generate('atom.dashboard'),
                 );
         }
 
@@ -65,7 +65,7 @@ final readonly class Action
                 ->createResponse(Status::SEE_OTHER)
                 ->withHeader(
                     'Location', 
-                    $this->urlGenerator->generate('atom.cms.dashboard'),
+                    $this->urlGenerator->generate('atom.dashboard'),
                 );
 
             if ($form->rememberMe) {
@@ -80,7 +80,7 @@ final readonly class Action
         }
 
         return $this->viewRenderer
-            ->withLayout('@atom/cms/src/Web/Shared/Layout/Login/layout.php')
+            ->withLayout('@atom/src/Web/Shared/Layout/Login/layout.php')
             ->render(__DIR__ . '/template', [
                 'form' => $form,
             ]);

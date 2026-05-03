@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Entity;
+namespace Atom\User;
 
 use DateTimeImmutable;
-use Atom\Cms\Repository\UserRepository;
 use Yiisoft\Auth\IdentityInterface;
 use Yiisoft\User\Login\Cookie\CookieLoginIdentityInterface;
 

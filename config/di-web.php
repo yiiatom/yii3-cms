@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Atom\Cms\Repository\UserRepository;
+use Atom\User\UserRepository;
 use Yiisoft\Auth\IdentityRepositoryInterface;
 
 

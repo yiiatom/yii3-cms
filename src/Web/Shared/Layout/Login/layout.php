@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Atom\Cms\Web\Shared\Layout\Login\Asset;
+use Atom\Web\Shared\Layout\Login\Asset;
 use Yiisoft\Html\Html;
 
 $assetManager->register(Asset::class);

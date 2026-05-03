@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Login;
+namespace Atom\Web\Login;
 
 use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\Label;

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-use Atom\Cms\ViewInjection\UserServiceInjection;
+use Atom\User\LayoutInjection;
 use Yiisoft\Definitions\Reference;
 
 return [
     'yiisoft/aliases' => [
         'aliases' => [
-            '@atom/cms' => dirname(__DIR__),
+            '@atom' => dirname(__DIR__),
         ],
     ],
 
     'yiisoft/yii-view-renderer' => [
         'injections' => [
-            Reference::to(UserServiceInjection::class),
+            Reference::to(LayoutInjection::class),
         ],
     ],
 

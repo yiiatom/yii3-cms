@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Dashboard;
+namespace Atom\Web\Dashboard;
 
 use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Yii\View\Renderer\WebViewRenderer;
@@ -16,7 +16,7 @@ final readonly class Action
     public function __invoke(): ResponseInterface
     {
         return $this->viewRenderer
-            ->withLayout('@atom/cms/src/Web/Shared/Layout/Main/layout.php')
+            ->withLayout('@atom/src/Web/Shared/Layout/Main/layout.php')
             ->render(__DIR__ . '/template');
     }
 }

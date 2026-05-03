@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Atom\Cms\Web\Shared\Middleware\Authentication;
-use Atom\Cms\Web\Shared\Middleware\LoginTheme;
-use Atom\Cms\Web\Shared\Middleware\MainTheme;
+use Atom\Web\Shared\Middleware\Authentication;
+use Atom\Web\Shared\Middleware\LoginTheme;
+use Atom\Web\Shared\Middleware\MainTheme;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
@@ -16,28 +16,28 @@ return [
         ->routes(
             Route::methods([Method::GET, Method::POST], '/login')
                 ->middleware(LoginTheme::class)
-                ->action(Atom\Cms\Web\Login\Action::class)
-                ->name('atom.cms.login'),
+                ->action(Atom\Web\Login\Action::class)
+                ->name('atom.login'),
 
             Group::create('')
                 ->middleware(MainTheme::class)
                 ->middleware(Authentication::class)
                 ->routes(
                     Route::get('')
-                        ->action(Atom\Cms\Web\Dashboard\Action::class)
-                        ->name('atom.cms.dashboard'),
+                        ->action(Atom\Web\Dashboard\Action::class)
+                        ->name('atom.dashboard'),
 
                     Route::get('/logout')
-                        ->action(Atom\Cms\Web\Logout\Action::class)
-                        ->name('atom.cms.logout'),
+                        ->action(Atom\Web\Logout\Action::class)
+                        ->name('atom.logout'),
 
                     Route::methods([Method::GET, Method::POST], '/profile')
-                        ->action(Atom\Cms\Web\Profile\Action::class)
-                        ->name('atom.cms.profile'),
+                        ->action(Atom\Web\Profile\Action::class)
+                        ->name('atom.profile'),
 
                     Route::methods([Method::GET, Method::POST], '/change-password')
-                        ->action(Atom\Cms\Web\ChangePassword\Action::class)
-                        ->name('atom.cms.change-password'),
+                        ->action(Atom\Web\ChangePassword\Action::class)
+                        ->name('atom.change-password'),
                 ),
         ),
 ];

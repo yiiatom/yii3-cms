@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Logout;
+namespace Atom\Web\Logout;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -26,7 +26,7 @@ final readonly class Action
             ->createResponse(Status::SEE_OTHER)
             ->withHeader(
                 'Location', 
-                $this->urlGenerator->generate('atom.cms.dashboard'),
+                $this->urlGenerator->generate('atom.dashboard'),
             );
     }
 }

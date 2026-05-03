@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\ChangePassword;
+namespace Atom\Web\ChangePassword;
 
 use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\Label;

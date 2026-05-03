@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Profile;
+namespace Atom\Web\Profile;
 
-use Atom\Cms\Repository\UserRepository;
+use Atom\User\UserRepository;
+use Atom\Web\Profile\ProfileForm;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -49,12 +50,12 @@ final readonly class Action
                 ->createResponse(Status::SEE_OTHER)
                 ->withHeader(
                     'Location', 
-                    $this->urlGenerator->generate('atom.cms.dashboard'),
+                    $this->urlGenerator->generate('atom.dashboard'),
                 );
         }
 
         return $this->viewRenderer
-            ->withLayout('@atom/cms/src/Web/Shared/Layout/Main/layout.php')
+            ->withLayout('@atom/src/Web/Shared/Layout/Main/layout.php')
             ->render(__DIR__ . '/template', [
                 'form' => $form,
             ]);

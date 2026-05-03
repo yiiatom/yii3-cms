@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atom\Cms\Web\Shared\Middleware;
+namespace Atom\Web\Shared\Middleware;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -30,7 +30,7 @@ final readonly class Authentication implements MiddlewareInterface
                 ->createResponse(Status::FOUND)
                 ->withHeader(
                     'Location', 
-                    $this->urlGenerator->generate('atom.cms.login'),
+                    $this->urlGenerator->generate('atom.login'),
                 );
         }
 

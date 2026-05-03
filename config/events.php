@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Atom\Cms\Listener\AfterLoginListener;
+use Atom\User\AfterLoginListener;
 use Yiisoft\User\Event\AfterLogin;
 
 return [
